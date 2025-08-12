@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://cubrn6pgtwffb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmany"]
+
+[sub_resource type="Sky" id="Sky_c6gwx"]
+sky_material = SubResource("ProceduralSkyMaterial_cmany")
+
+[sub_resource type="Environment" id="Environment_cmany"]
+background_mode = 2
+sky = SubResource("Sky_c6gwx")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_c6gwx"]
+
+[sub_resource type="Compositor" id="Compositor_2dftf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cmany"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c6gwx"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2dftf"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 4.76837e-07, 3.42049, 1.86645)
+light_energy = 1.162
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cmany")
+camera_attributes = SubResource("CameraAttributesPractical_c6gwx")
+compositor = SubResource("Compositor_2dftf")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_cmany")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.1, 10)
+shape = SubResource("BoxShape3D_c6gwx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_2dftf")
